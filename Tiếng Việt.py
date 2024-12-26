@@ -111,10 +111,10 @@ class Game:
 
             if self.test_mode == True:
                 self.label1.config(text='--------')
+                self.label2.config(text='--------')
             else:
                 self.label1.config(text=self.item[0])
-
-            self.label2.config(text=self.item[1])
+                self.label2.config(text=self.item[1])
 
             self.level_progress_label2.config(text=str(self.level_progress+1)+"/"+str(len(self.level)))
             
@@ -130,8 +130,12 @@ class Game:
                 self.entry.config(fg="#FF6347")
 
     def play_audio(self, text):
-        path = self.course.course_path+"/audio/"+text.replace('/', '--').replace('\\', '__').replace('\t', '____').replace('?', '')+".wav"
-        sound = pygame.mixer.Sound(path)
+        path = self.course.course_path+"/audio/audio_"+text.replace('/', '--').replace('\\', '__').replace('\t', '____').replace('?', '').upper()
+
+        if os.path.exists(path+".wav"):
+            sound = pygame.mixer.Sound(path+".wav")
+        elif os.path.exists(path+".mp3"):
+            sound = pygame.mixer.Sound(path+".mp3")
         sound.play()
 
     def play_audio_helper(self):
@@ -175,7 +179,7 @@ class Game:
 
         self.item = self.level[self.level_progress]
         self.label1.config(text='--------')
-        self.label2.config(text=self.item[1])
+        self.label2.config(text='--------')
 
         self.level_progress_label2.config(text=str(self.level_progress+1)+"/"+str(len(self.level)))
         self.level_label.config(text=str(self.profile.current_level)+"/"+str(self.profile.total_levels))

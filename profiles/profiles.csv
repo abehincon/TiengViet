@@ -1,2 +1,2 @@
 name,course_path,total_levels,level_reached,completed
-Default,./courses/my_course,82,82,FALSE
+MyProfile,./courses/my_course_2,84,1,FALSE
